@@ -1147,7 +1147,7 @@ namespace DotSpatial.Symbology
                     break;
                 case 'm':
                 case 'M':
-                    if (s.Substring(position, 3).ToUpper() == "MOD")
+                    if (s.Length >= position + 3 && s.Substring(position, 3).ToUpper() == "MOD")
                     {
                         element.type = tkElementType.etOperation;
                         element.priority = 3;

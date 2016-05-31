@@ -52,6 +52,13 @@ namespace DotSpatial.Controls
 
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// If IdentifyIfSelectionDisabled = false : Skip Identify for each layer when the layer property SelectionEnabled = false
+        /// </summary>
+        public bool IdentifyIfSelectionDisabled { get; set; }
+
+        #endregion
         #region Methods
 
         /// <summary>
@@ -146,6 +153,8 @@ namespace DotSpatial.Controls
                     var gfl = lr as IMapFeatureLayer;
                     if (gfl != null && gfl.IsVisible)
                     {
+                        if (!gfl.SelectionEnabled && !IdentifyIfSelectionDisabled) continue;
+
                         _frmFeatureIdentifier.Add(gfl,
                             gfl.DataSet.FeatureType == FeatureType.Polygon ? strict : tolerant);
                         continue;

@@ -58,11 +58,18 @@ namespace DotSpatial.Data
         #region Methods
 
         /// <summary>
-        /// Gets the list of string names available as columns from the specified excel file.
+        /// For attributes that are small enough to be loaded into a data table, this
+        /// will join attributes from a foreign table.  This method
+        /// won't create new rows in this table, so only matching members are brought in,
+        /// but no rows are removed either, so not all rows will receive data.
         /// </summary>
-        /// <param name="xlsFilePath"></param>
-        /// <returns></returns>
-        List<string> GetColumnNames(string xlsFilePath);
+        /// <param name="table">Foreign data table.</param>
+        /// <param name="localJoinField">The field name to join on in this table.</param>
+        /// <param name="dataTableJoinField">The field in the foreign table.</param>
+        /// <returns>
+        /// A modified featureset with the changes.
+        /// </returns>
+        IFeatureSet Join(DataTable table, string localJoinField, string dataTableJoinField);
 
         /// <summary>
         /// For attributes that are small enough to be loaded into a data table, this
@@ -73,6 +80,9 @@ namespace DotSpatial.Data
         /// <param name="xlsFilePath">The complete path of the file to join</param>
         /// <param name="localJoinField">The field name to join on in this table</param>
         /// <param name="xlsJoinField">The field in the foreign table.</param>
+        /// <returns>
+        /// A modified featureset with the changes.
+        /// </returns>
         IFeatureSet Join(string xlsFilePath, string localJoinField,
                          string xlsJoinField);
 
@@ -182,14 +192,6 @@ namespace DotSpatial.Data
         /// This may also be a cue to read values from a database.
         /// </summary>
         void FillAttributes(IProgressHandler progressHandler);
-
-        /// <summary>
-        /// Obtains the list of feature indices that match the specified filter expression.
-        /// </summary>
-        /// <param name="filterExpression">The filter expression to find features for.</param>
-        /// <returns>The list of integers that are the FIDs of the specified values.</returns>
-        [Obsolete("Use SelectIndexByAttribute(filterExpression) instead.")] // Marked obsolete in 1.7.
-        List<int> Find(string filterExpression);
 
         /// <summary>
         /// This forces the vertex initialization so that Vertices, ShapeIndices, and the

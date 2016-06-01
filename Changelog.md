@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Removed DotSpatial.Topology assembly (#633)
+- Removed obsolete methods\properties (#797)
 
 ### Fixed
 - ShapeReader skipping one entry when switching the page (#774)
@@ -37,4 +38,5 @@ All notable changes to this project will be documented in this file.
 - SqlServer raise WKB is not valid format. (#499)
 - Error inside ClipPolygonWithLine that caused an exception because the output filename wasn't set
 - Incorrect toWgs84 initialisation in Proj4DatumName set accesor (#732)
-
+- Unhandled exception when zoom to empty Group (#796)
+- Excel Join, wrong OleDbAdaptater. (#250)
